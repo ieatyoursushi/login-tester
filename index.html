@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Mail Verification System</title>
+</head>
+
+<body>
+    <header>
+        <h1>Email Verification System (Nodejs work in progress) </h1>
+    </header>
+    <div class="root">
+        <h3> Sign In </h3>
+        <p id="userMatchingStatus"></p>
+        <div class="field">
+            <input id="emailDB" type="text" placeholder="Enter Email" style="margin-bottom:15px;">
+        </div>
+        <div class="field">
+            <input id="passDB" type="password" placeholder="Enter Password">
+        </div>
+ 
+        <button id="sign-in"> Sign In </button>
+        <p id="createAcc">Don't have one? <u style="cursor:pointer;color:grey">create one here</u></p>
+        <img class='load' src='loading.gif'>
+        <h2 style= "font-weight:100"> test user that exists in database: email: email@example.com, password: password123</h2>
+        <h2> Do not enter your real password (enter a fake or just spam characters) </h2>
+        <h3 id="number"></h3>
+    </div>
+    <div class="root">
+        <div class="field">
+            <h3 class="h2title"> Enter Email: </h3>
+            <input id="emailIn" type="text" placeholder="email@example.com">
+            <p id='emailDatabaseStatus'> </p>
+        </div>
+        <div class="field">
+            <h3 class="h2title"> Create Password: </h3>
+            <input id="passIn" type="password" placeholder="">
+        </div>
+        <header class="policy">
+            <input type="checkbox" id="readPrivacy">
+            <p> Make sure to read our <span><a target="_blank"href="privacy-policy.html" style='color: grey; cursor: pointer'> <u>privacy policy</u> </a></span></p>
+        </header>
+        <button id="emailListener"> Next </button>
+        <img class="loading" src="loading.gif">
+        <p id="passwordChecker"></p>
+    </div>
+    <div class="root" id="verifyPage"> 
+        <h3 class="veriText"> A 6-digit verification code has been sent to the email adress: null </h3>
+        <div class="verificationBox">
+            <button id="resendList"> Re-send </button>
+            <input id="verificationIn" style="padding:8px" type="text" placeholder="Enter 6 digit code">
+            <button id="verify"> verify </button>
+        </div>
+        <img class="loading" src="loading.gif">
+        <button id="backButton"> back </button>
+        <p id="codeChecker"> </p>
+    </div>
+    <div class="root" id="accountSuccessful"> 
+        <h2> Account successfully registered. </h2>
+        <button id="exit"> Exit </button>
+    </div>
+    <script src="script.js" type="module"></script>
+    <script src="login.js" type="module"></script>
+    <script src="passChecker.js" type="module"></script>
+    <script src="amountOfUser.js"></script>
+</body>
+
+</html>
