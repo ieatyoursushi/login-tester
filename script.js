@@ -15,6 +15,7 @@ function showPage(index) {
     });
     roots[index].classList.remove("invis");
 }
+export {showPage};
 showPage(0);
 addEventListener('load', () => {
     if (document.URL == "https://api-tester.ieatyourshushi.repl.co/#p2") {
