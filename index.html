@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/user-interface.css">
     <title>Mail Verification System</title>
     
 </head>
@@ -66,11 +67,16 @@
         <h2> Account successfully registered. </h2>
         <button id="exit"> Exit </button>
     </div>
-    <script src="script.js" type="module"></script>
-    <script src="login.js" type="module"></script>
-    <script src="passChecker.js" type="module"></script>
-    <script src="amountOfUser.js"></script>
+    <div class="root invis" id="user-interface"></div>
     
+    <script src="scripts/script.js" type="module"></script>
+    <script src="scripts/passChecker.js" type="module"></script>
+    <script src="scripts/amountOfUser.js"></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.5/babel.min.js"></script>
+    <script src="scripts/login.jsx" type="text/babel"></script>
+
 </body>
 
 </html>

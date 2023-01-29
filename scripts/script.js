@@ -86,8 +86,8 @@ function checkForEmailDuplicates(email) {
         }
     })
 }
-import { regexSets } from '/passChecker.js';
-import visualConditional from '/passChecker.js';
+import { regexSets } from '/scripts/passChecker.js';
+import visualConditional from '/scripts/passChecker.js';
 let emailVerified = false;
 function isVerifiedUpdate(data) {
     setInterval(function(data) {

@@ -1,0 +1,16 @@
+.sroot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    min-height: 300px;
+}
+.user-root {
+    display: flex;
+    justify-content: flex-start;
+    height: 100%;
+}
+.interface-main {
+    
+}

@@ -1,0 +1,21 @@
+{
+  "name": "api-tester",
+  "version": "1.0.0",
+  "description": "",
+  "main": "amountOfUser.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ieatyoursushi/login-tester.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ieatyoursushi/login-tester/issues"
+  },
+  "homepage": "https://github.com/ieatyoursushi/login-tester#readme"
+}
