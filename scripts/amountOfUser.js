@@ -9,5 +9,5 @@ function fetchUserAmount() {
 }
 fetchUserAmount().then(data => {
     console.log(data);
-    document.getElementById("number").innerText = "Amount of registered users: " + data.AmountOfUsers;
+    document.getElementById("number").innerText = "Registered Users: " + data.AmountOfUsers;
 })

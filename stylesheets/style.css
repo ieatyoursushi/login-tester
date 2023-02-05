@@ -1,6 +1,8 @@
 html, body {
   height: 100%;
   width: 100%;
+    margin: 0;
+    padding: 0;
 }
 header {
     width: 100%;
@@ -9,10 +11,11 @@ header {
 .root {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: top;
     flex-direction: column;
     width: 100%;
     min-height: 300px;
+    height:100%;
 }
  
 .invis {

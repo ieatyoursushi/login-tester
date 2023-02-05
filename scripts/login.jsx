@@ -56,11 +56,30 @@ class UserPageInstance{
         }        
     }
     userPage() {
+        const divStyle = {
+            display: 'flex',
+            alignItems: 'center',
+        };
+        const settingStyle = {
+            marginRight: '10px',
+            width: '30px',
+            height: '30px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '20px',
+        }
         return (
             <div className="sroot user-root">
                 <div className="interface-main">
-                    <h1>Welcome, {this.userObj.email}</h1>
-                    <button onClick={this.destroyUserPage} id="log-out"> Log Out </button>
+                    <header style={divStyle} >
+                        <h1>Welcome, {this.userObj.email}</h1>
+                        <button style={{marginLeft:'10px'}} onClick={this.destroyUserPage} id="log-out"> Log Out </button>
+                    </header>
+ 
+
+
+                    
                 </div>
 
             </div>

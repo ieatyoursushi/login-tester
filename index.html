@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="stylesheets/style.css">
     <link rel="stylesheet" href="stylesheets/user-interface.css">
     <title>Mail Verification System</title>
-    
+
 </head>
 
 <body>
@@ -27,10 +27,14 @@
 
         <button id="sign-in"> Sign In </button>
         <p id="createAcc">Don't have one? <u style="cursor:pointer;color:grey">create one here</u></p>
+        <p id="forgot" style="margin:0">Forgot your password? (beta) <u style="cursor:pointer;color:grey; margin:0">
+                reset it here </u></p>
+
         <img class='load' src='loading.gif'>
-        <h2 style="font-weight:100"> test user that exists in database: email: email@example.com, password: password123
+        <h2 style="font-weight:100; margin-bottom:0"> test user that exists in database: email: email@example.com,
+            password: password123
         </h2>
-        <h2> Do not enter your real password (enter a fake or just spam characters) </h2>
+        <h2 style="margin-bottom:0"> Do not enter your real password (enter a fake or just spam characters) </h2>
         <h3 id="number"></h3>
     </div>
     <div class="root">
@@ -53,7 +57,7 @@
         <p id="passwordChecker"></p>
     </div>
     <div class="root" id="verifyPage">
-        <h3 class="veriText"> A 6-digit verification code has been sent to the email adress: null </h3>
+        <h3 class="veriText"> A 6-digit verification code has been sent to the email address: null </h3>
         <div class="verificationBox">
             <button id="resendList"> Re-send </button>
             <input id="verificationIn" style="padding:8px" type="text" placeholder="Enter 6 digit code">
@@ -67,11 +71,53 @@
         <h2> Account successfully registered. </h2>
         <button id="exit"> Exit </button>
     </div>
+    <div class="root" id="forgotPassword">
+        <h2> Enter your Email: </h2>
+        <p id='sd'style="color:red"> </p>
+        <div style="display:flex">
+            <input type="text" id="fEmailIn" placeholder="email@example.com">
+            <button id="fEmailSubmit"> Next </button>
+        </div>
+        <img src="loading.gif" id="forgotLoad">
+    </div>
+    <!-- same as the verification system used to create an account--->
+    <div class="root" id="verifyExistingEmail">
+        <h3 class="veriText"> A 6-digit verification code has been sent to your email address</h3>
+        <div class="verificationBox">
+            <input id="fVerificationIn" style="padding:8px" type="text" placeholder="Enter 6 digit code">
+            <button id="fVerify"> verify </button>
+        </div>
+    </div>
+    <div class="root" id="changePassword">
+        <h3> Enter your new Password (8 or more characters)</h3>
+        <div class="verificationBox">
+            <input id="newPasswordIn" type="password">
+            <button id="newPasswordSubmit"> change </button>
+
+        </div>
+        <header style="display:flex; width:100%;justify-content: center;">
+            <input id="showPass" type="checkbox" onclick="showPassword(this)">
+            <label for="showPass"> Show Password </label>
+        </header>
+    </div>
+    <div class="root" id="successfullyChanged">
+        <h2> Password successfully changed. </h2>
+        <button id="exit2"> Exit </button>
+    </div>
     <div class="root invis" id="user-interface"></div>
-    
+    <script>
+        function showPassword(_this) {
+            if (_this.checked) {
+                document.getElementById('newPasswordIn').type = 'text';
+            } else {
+                document.getElementById('newPasswordIn').type = 'password'
+            }
+        }
+    </script>
     <script src="scripts/script.js" type="module"></script>
     <script src="scripts/passChecker.js" type="module"></script>
     <script src="scripts/amountOfUser.js"></script>
+    <script src="scripts/forgotPass.js" type="module"></script>
     <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.12.5/babel.min.js"></script>
