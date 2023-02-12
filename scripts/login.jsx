@@ -6,12 +6,13 @@ let signInButton = document.getElementById('sign-in');
 const loading = document.querySelector('.load');
 let roots = document.querySelectorAll('.root');
 class User {
-    constructor(email, password) {
+    constructor(email, password, username) {
         this.method = 'POST';
         this.body = JSON.stringify({ email: email, password: password }),
-            this.headers = { 'Content-Type': 'applications/json' }
+        this.headers = { 'Content-Type': 'applications/json' }
         this.email = email;
         this.pass = password;
+        this.username = username;
     }
 }
 function showPage(index) {
@@ -32,10 +33,10 @@ signInButton.addEventListener('click', function() {
             .then(data => {
                 console.log(data);
                 loading.style.visibility = 'hidden';
-                if (data) {
+                if (data.matchStatus) {
                     loginStatus.style.color = 'green';
                     loginStatus.innerText = 'User Exists';
-                    let loginUser = new UserPageInstance(new User(emailSignIn.value.toLowerCase(), passwordSignIn.value));
+                    let loginUser = new UserPageInstance(new User(emailSignIn.value.toLowerCase(), passwordSignIn.value, data.username));
                     loginUser.createUserPage();
                     roots = document.querySelectorAll('.root');
                     showPage(document.querySelectorAll(".root").length - 1);
@@ -47,13 +48,13 @@ signInButton.addEventListener('click', function() {
     }
 })
 
-class UserPageInstance{
+class UserPageInstance {
     constructor(user) {
         this.userObj = user;
         this.state = {
             loggedIn: true,
             loggedOut: false,
-        }        
+        }
     }
     userPage() {
         const divStyle = {
@@ -69,21 +70,67 @@ class UserPageInstance{
             justifyContent: 'center',
             fontSize: '20px',
         }
+        const inputStyle = {
+            display: 'flex',
+            marginBottom: '20px',
+        }
         return (
             <div className="sroot user-root">
                 <div className="interface-main">
                     <header style={divStyle} >
-                        <h1>Welcome, {this.userObj.email}</h1>
-                        <button style={{marginLeft:'10px'}} onClick={this.destroyUserPage} id="log-out"> Log Out </button>
+                        <h1 id="usernameTitle">Welcome, {this.userObj.username}</h1>
+                        <button style={{ marginLeft: '10px' }} onClick={this.destroyUserPage} id="log-out"> Log Out </button>
                     </header>
+                    <h2> Create/Update Username: </h2>
+                    <div style={inputStyle}>
+                        <input type="text" id="createUsername" />
+                        <button id="usernameSubmit" onClick={() => this.updateUsername(document.getElementById("createUsername").value)}> update </button>
+                    </div>
+                    <p className="usernameChangeStatus invis"> </p>
+                    <div style={inputStyle}>
+                        <p> Want to be on our mailing list? (projects updates and such, coming soon): </p>
+                        <input type="checkbox" id="onEmailingList" />
+                    </div>
  
 
-
-                    
                 </div>
 
             </div>
         );
+    }
+    sendUsernameToBackend(_username, email) {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username: _username, email: this.userObj.email }),
+        }
+        return new Promise((resolve, reject) => {
+            fetch('https://Mail-Verification.ieatyourshushi.repl.co/updateUsername', options)
+            .then(data => data.json())
+            .then(data => resolve(data))
+            .catch(err => console.log(err));
+        })
+
+    }
+    updateUsername(_username) {
+        let usernameStatus = document.querySelector(".usernameChangeStatus");
+        usernameStatus.classList.add("invis");
+        let username = _username.replace(/\s/g, '');
+        console.log(username);
+        if (username.length >= 4 && username.length <= 30) {
+            this.sendUsernameToBackend(username).then(status => {
+                console.log(status);
+                if(status) {
+                    document.getElementById("usernameTitle").innerHTML = "Welcome, " + username;
+                } else {
+                    console.log("username already exists");
+                    usernameStatus.classList.remove("invis");
+                    usernameStatus.innerHTML = "username already exists";
+                }
+            })
+        }
     }
     //left off
     createUserPage() {
@@ -93,11 +140,11 @@ class UserPageInstance{
         showPage(0);
         ReactDOM.render(null, document.getElementById('user-interface'));
     }
-    
+
 }
 class First extends React.Component {
     render() {
         return <h1>Hello, {this.props.title}</h1>;
     }
 }
-//ReactDOM.render(<First name="reaction" title="mytitle" /> , document.body);      
+//ReactDOM.render(<First name="reaction" title="mytitle" /> , document.body);
