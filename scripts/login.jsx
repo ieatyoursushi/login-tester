@@ -27,11 +27,11 @@ signInButton.addEventListener('click', function() {
 
     if (emailSignIn.value != '' && passwordSignIn != '') {
         loading.style.visibility = 'visible';
-        console.log(this.id);
+        //console.log(this.id);
         fetch('https://mail-verification.ieatyourshushi.repl.co/checkForSignIn', new User(emailSignIn.value.toLowerCase(), passwordSignIn.value))
             .then(data => data.json())
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 loading.style.visibility = 'hidden';
                 if (data.matchStatus) {
                     loginStatus.style.color = 'green';
@@ -40,6 +40,7 @@ signInButton.addEventListener('click', function() {
                     loginUser.createUserPage();
                     roots = document.querySelectorAll('.root');
                     showPage(document.querySelectorAll(".root").length - 1);
+                    loginUser.getMailingListValue(document.getElementById("onEmailingList"));
                 } else {
                     loginStatus.style.color = 'red';
                     loginStatus.innerText = 'Email or Passowrd incorrect';
@@ -73,6 +74,7 @@ class UserPageInstance {
         const inputStyle = {
             display: 'flex',
             marginBottom: '20px',
+            
         }
         return (
             <div className="sroot user-root">
@@ -87,11 +89,11 @@ class UserPageInstance {
                         <button id="usernameSubmit" onClick={() => this.updateUsername(document.getElementById("createUsername").value)}> update </button>
                     </div>
                     <p className="usernameChangeStatus invis"> </p>
-                    <div style={inputStyle}>
+                    <div style={{display: 'flex', marginBotton: '20px', alignItems: 'center',}}>
                         <p> Want to be on our mailing list? (projects updates and such, coming soon): </p>
-                        <input type="checkbox" id="onEmailingList" />
+                        <input type="checkbox" id="onEmailingList" onChange={() => this.updateMailingList(document.getElementById("createUsername").value, document.getElementById("onEmailingList").checked )} />
                     </div>
- 
+
 
                 </div>
 
@@ -108,28 +110,76 @@ class UserPageInstance {
         }
         return new Promise((resolve, reject) => {
             fetch('https://Mail-Verification.ieatyourshushi.repl.co/updateUsername', options)
-            .then(data => data.json())
-            .then(data => resolve(data))
-            .catch(err => console.log(err));
+                .then(data => data.json())
+                .then(data => resolve(data))
+                .catch(err => console.log(err));
         })
 
+    }
+    getMailingListValue(input) {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'applications/json',
+            },
+            body: JSON.stringify({onMailingList: null, email: this.userObj.email, type:'get'})
+        }  
+        fetch('https://Mail-Verification.ieatyourshushi.repl.co/updateMailingList', options)
+                .then(data => data.json())
+                .then(data => {
+                    input.checked = data;  
+                }).catch(err => console.log(err));
+        
+    }
+    updateMailingList(email, toggle) {
+        console.log(toggle);
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'applications/json',
+            },
+            body: JSON.stringify({onMailingList: toggle, email: this.userObj.email, type:'post'})
+        }
+        
+        return new Promise((resolve, reject) => {
+            fetch('https://Mail-Verification.ieatyourshushi.repl.co/updateMailingList', options)
+                .then(data => data.json())
+                .then(data => resolve(data))
+                .catch(err => console.log(err));
+        })
     }
     updateUsername(_username) {
         let usernameStatus = document.querySelector(".usernameChangeStatus");
         usernameStatus.classList.add("invis");
         let username = _username.replace(/\s/g, '');
-        console.log(username);
         if (username.length >= 4 && username.length <= 30) {
             this.sendUsernameToBackend(username).then(status => {
-                console.log(status);
-                if(status) {
-                    document.getElementById("usernameTitle").innerHTML = "Welcome, " + username;
+                if (status) {
+                    document.getElementById("usernameTitle").innerHTML = "Welcome, " + username.toLowerCase();
+                    usernameStatus.classList.remove("invis");
+                    usernameStatus.style.color = "green";
+                    usernameStatus.innerHTML = "username successfully changed";
                 } else {
                     console.log("username already exists");
                     usernameStatus.classList.remove("invis");
                     usernameStatus.innerHTML = "username already exists";
+                    usernameStatus.style.color = "red";
                 }
             })
+        } else {
+            if (username.length < 4) {
+                usernameStatus.classList.remove("invis");
+                usernameStatus.innerHTML = "Username too short (4 characters min)";
+                usernameStatus.style.color = "red";
+            } else if (username.length > 30) {
+                usernameStatus.classList.remove("invis");
+                usernameStatus.innerHTML = "Userame too long (30 characters max)";
+                usernameStatus.style.color = "red";
+            } else {
+                usernameStatus.classList.remove("invis");
+                usernameStatus.innerHTML = "Somethig went wrong";
+                usernameStatus.style.color = "red";
+            }
         }
     }
     //left off
