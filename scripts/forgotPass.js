@@ -17,7 +17,7 @@ First possible use of websockets
 */
 function sendEmailCode(options) {
     return new Promise((resolve, reject) => {
-        fetch('https://mail-verification.ieatyourshushi.repl.co/verificationCode/send', options)
+        fetch('https://12d0099a-1529-4de2-9468-c224649003b1-00-187mkm0yvrntp.janeway.replit.dev:3000/verificationCode/send', options)
             .then(response => response.json()).then((data) => {
                 resolve(data);
             }).catch(err => {
@@ -91,7 +91,7 @@ function activateChangePassword() {
 }
 function changeUserPassword(passwordObj) {
     return new Promise((resolve, reject) => {
-        fetch('https://Mail-verification.ieatyourshushi.repl.co/changePassword', passwordObj)
+        fetch('https://12d0099a-1529-4de2-9468-c224649003b1-00-187mkm0yvrntp.janeway.replit.dev:3000/changePassword', passwordObj)
         .then(status => status.json())
         .then(status => {
             //if status is successful
@@ -101,7 +101,7 @@ function changeUserPassword(passwordObj) {
 }
 async function emailInDB(email) {
     return new Promise((resolve, reject) => {
-        fetch('https://Mail-Verification.ieatyourshushi.repl.co/checkForDuplicatesInDB', new Options(email))
+        fetch('https://12d0099a-1529-4de2-9468-c224649003b1-00-187mkm0yvrntp.janeway.replit.dev:3000/checkForDuplicatesInDB', new Options(email))
         .then(data => data.json())
         .then(data => {console.log(!data); resolve(!data.emailNotStored)})
         .catch(err => reject(err));
@@ -109,7 +109,7 @@ async function emailInDB(email) {
 }
 async function emailVerification(email) {
     return new Promise((resolve, reject) => {
-        fetch('https://Mail-Verification.ieatyourshushi.repl.co/verificationCode/send', new Options(email))
+        fetch('https://12d0099a-1529-4de2-9468-c224649003b1-00-187mkm0yvrntp.janeway.replit.dev:3000/verificationCode/send', new Options(email))
         .then(data => data.json())
         .then(data => resolve(data))
         .catch(err => reject(err));

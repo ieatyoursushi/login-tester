@@ -1,7 +1,8 @@
 const emailSignIn = document.getElementById('emailDB');
 const passwordSignIn = document.getElementById('passDB');
 const loginStatus = document.getElementById('userMatchingStatus');
-const databaseURL = 'https://mail-verification.ieatyourshushi.repl.co/checkForDuplicatesInDB';
+
+const databaseURL =  `https://12d0099a-1529-4de2-9468-c224649003b1-00-187mkm0yvrntp.janeway.replit.dev:3000/checkForDuplicatesInDB`;
 let signInButton = document.getElementById('sign-in');
 const loading = document.querySelector('.load');
 let roots = document.querySelectorAll('.root');
@@ -28,7 +29,7 @@ signInButton.addEventListener('click', function() {
     if (emailSignIn.value != '' && passwordSignIn != '') {
         loading.style.visibility = 'visible';
         //console.log(this.id);
-        fetch('https://mail-verification.ieatyourshushi.repl.co/checkForSignIn', new User(emailSignIn.value.toLowerCase(), passwordSignIn.value))
+        fetch('https://12d0099a-1529-4de2-9468-c224649003b1-00-187mkm0yvrntp.janeway.replit.dev:3000/checkForSignIn', new User(emailSignIn.value.toLowerCase(), passwordSignIn.value))
             .then(data => data.json())
             .then(data => {
                 //console.log(data);
@@ -109,7 +110,7 @@ class UserPageInstance {
             body: JSON.stringify({ username: _username, email: this.userObj.email }),
         }
         return new Promise((resolve, reject) => {
-            fetch('https://Mail-Verification.ieatyourshushi.repl.co/updateUsername', options)
+            fetch('https://12d0099a-1529-4de2-9468-c224649003b1-00-187mkm0yvrntp.janeway.replit.dev:3000/updateUsername', options)
                 .then(data => data.json())
                 .then(data => resolve(data))
                 .catch(err => console.log(err));
@@ -124,7 +125,7 @@ class UserPageInstance {
             },
             body: JSON.stringify({onMailingList: null, email: this.userObj.email, type:'get'})
         }  
-        fetch('https://Mail-Verification.ieatyourshushi.repl.co/updateMailingList', options)
+        fetch('https://12d0099a-1529-4de2-9468-c224649003b1-00-187mkm0yvrntp.janeway.replit.dev:3000/updateMailingList', options)
                 .then(data => data.json())
                 .then(data => {
                     input.checked = data;  
@@ -142,7 +143,7 @@ class UserPageInstance {
         }
         
         return new Promise((resolve, reject) => {
-            fetch('https://Mail-Verification.ieatyourshushi.repl.co/updateMailingList', options)
+            fetch('https://12d0099a-1529-4de2-9468-c224649003b1-00-187mkm0yvrntp.janeway.replit.dev:3000/updateMailingList', options)
                 .then(data => data.json())
                 .then(data => resolve(data))
                 .catch(err => console.log(err));

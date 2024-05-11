@@ -18,7 +18,7 @@ function showPage(index) {
 export {showPage};
 showPage(0);
 addEventListener('load', () => {
-    if (document.URL == "https://api-tester.ieatyourshushi.repl.co/#p2") {
+    if (document.URL == "https://12d0099a-1529-4de2-9468-c224649003b1-00-187mkm0yvrntp.janeway.replit.dev:3000/#p2") {
         showPage(1);
     }
 })
@@ -29,7 +29,7 @@ function Options(email) {
 }
 function verifyEmail(options) {
     return new Promise((resolve, reject) => {
-        fetch('https://mail-verification.ieatyourshushi.repl.co/verificationCode/send', options)
+        fetch('https://12d0099a-1529-4de2-9468-c224649003b1-00-187mkm0yvrntp.janeway.replit.dev:3000/verificationCode/send', options)
             .then(response => response.json()).then((data) => {
                 resolve(data);
             }).catch(err => {
@@ -61,7 +61,7 @@ function verifiedUser(email, pass) {
 function storeEmailInDatabase(email, password) {
     return new Promise((resolve, reject) => {
         try {
-            fetch('https://mail-verification.ieatyourshushi.repl.co/LoginDB', new verifiedUser(email, password))
+            fetch('https://12d0099a-1529-4de2-9468-c224649003b1-00-187mkm0yvrntp.janeway.replit.dev:3000/LoginDB', new verifiedUser(email, password))
                 .then((data) => data.json()).then((data) => {
                     console.log(data)
                     resolve(true);
@@ -75,7 +75,7 @@ function storeEmailInDatabase(email, password) {
 function checkForEmailDuplicates(email) {
     return new Promise((resolve, reject) => {
         try {
-            fetch('https://mail-verification.ieatyourshushi.repl.co/checkForDuplicatesInDB', new Options(email))
+            fetch('https://12d0099a-1529-4de2-9468-c224649003b1-00-187mkm0yvrntp.janeway.replit.dev:3000/checkForDuplicatesInDB', new Options(email))
                 .then((data) => data.json())
                 .then(data => {
                     resolve(data);
@@ -212,10 +212,10 @@ function countedDown(seconds) {
     }).catch(err => { console.log(err); reject(false) });
 }
 backButton.addEventListener('click', () => {
-    location.href = 'https://api-tester.ieatyourshushi.repl.co/#p2';
+    location.href = 'https://12d0099a-1529-4de2-9468-c224649003b1-00-187mkm0yvrntp.janeway.replit.dev:3000/#p2';
     location.reload();
 })
 document.getElementById('exit').addEventListener('click', () => {
-    location.href = 'https://api-tester.ieatyourshushi.repl.co';
+    location.href = 'https://12d0099a-1529-4de2-9468-c224649003b1-00-187mkm0yvrntp.janeway.replit.dev:3000';
 })
 
